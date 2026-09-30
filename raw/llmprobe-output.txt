@@ -1,0 +1,143 @@
+npm notice run npx
+npm notice run 'llmprobe' 127.0.0.1:11234 -m Qwen3.8-Flash-Next-MLX-Serve-mixed-4-8bit --bench-only --rungs 2k,4k,8k,16k,32k,64k,128k,250k --concurrency 4 --label Flash-Next mixed4-8 | mlx-serve 26.9.7-dev 933566c | M5 Ultra 256GB | max-concurrent 4 --no-color
+llmprobe v0.6.13 · probing http://127.0.0.1:11234
+
+  ✓ /v1/models               HTTP 200
+  ✓ chat/completions         HTTP 400
+  ✓ responses                HTTP 400
+  ✓ messages                 HTTP 400
+  ✗ messages/count_tokens    endpoint not found
+  ✓ embeddings               HTTP 400
+  ✓ completions (legacy)     HTTP 400
+  ✓ images/generations       HTTP 400
+  ✓ images/edits             HTTP 400
+  ✓ audio/speech             HTTP 400
+  ✗ audio/transcriptions     endpoint not found
+  ○ Ollama-compatible /api/chat detected, not scored
+  ○ Ollama-compatible /api/tags detected, not scored
+
+model: Qwen3.8-Flash-Next-MLX-Serve-mixed-4-8bit   depth: default   reasoning model — +1024 token headroom
+engine: kv bf16 · ctx 256k · MTP exact · PLD
+  thinking:    on
+  reasoning:   medium
+  sampling:    greedy (temperature 0)
+  concurrency: 4
+  rungs:       2k, 4.1k, 8.2k, 16.4k, 32.8k, 65.5k, 131.1k, 256k
+  runs:        warmup + 3 per scenario
+
+
+benchmarking (warmup + median of 3)...
+  decode length probe
+  decode length probe       discarded
+  decode warmup             discarded
+  decode 1/3                154.5 tok/s
+  decode 2/3                143.6 tok/s
+  decode 3/3                165.8 tok/s
+  prefill warmup            discarded
+  prefill 1/3               4176.6 tok/s
+  prefill 2/3               4203.6 tok/s
+  prefill 3/3               4183.4 tok/s
+  spec:predictable warmup   discarded
+  spec:predictable 1/3      283.6 tok/s
+  spec:predictable 2/3      277.4 tok/s
+  spec:predictable 3/3      274.2 tok/s
+  spec:novel warmup         discarded
+  spec:novel 1/3            120.5 tok/s
+  spec:novel 2/3            120.5 tok/s
+  spec:novel 3/3            120.1 tok/s
+  prefix cache cold
+  prefix cache warm
+  batching 1 stream
+  batching 4 streams
+  context calibrating
+  context ~2.0k
+  context ~2.0k ceiling
+  context ~2.0k x4
+       ~2.1k  153.2 tok/s decode · 3274 tok/s prefill · 0.6s first token · 3.43 tok/step
+              x4 · 123.7 tok/s total · 45.6 tok/s each · 0.31 efficiency (serialized) · 2.6s worst first token
+  context ~4.1k
+  context ~4.1k ceiling
+  context ~4.1k x4
+       ~4.1k  152.6 tok/s decode · 2210 tok/s prefill · 1.8s first token · 3.62 tok/step
+              x4 · 76.7 tok/s total · 34.4 tok/s each · 0.31 efficiency (serialized) · 5.9s worst first token
+  context ~8.2k
+  context ~8.2k ceiling
+  context ~8.2k x4
+       ~8.3k  153.9 tok/s decode · 4046 tok/s prefill · 2.0s first token · 3.69 tok/step
+              x4 · 57.3 tok/s total · 31 tok/s each · 0.25 efficiency (serialized) · 10.2s worst first token
+  context ~16.4k
+  context ~16.4k ceiling
+  context ~16.4k x4
+      ~16.3k  147.6 tok/s decode · 4351 tok/s prefill · 3.7s first token · 3.49 tok/step
+              x4 · 36.5 tok/s total · 21.8 tok/s each · 0.24 efficiency (serialized) · 17.7s worst first token
+  context ~32.8k
+  context ~32.8k ceiling
+  context ~32.8k x4
+      ~32.9k  137.2 tok/s decode · 4334 tok/s prefill · 7.6s first token · 3.25 tok/step
+              x4 · 14.3 tok/s total · 13.9 tok/s each · 0.17 efficiency (serialized) · 50.7s worst first token
+  context ~65.5k
+  context ~65.5k ceiling
+  context ~65.5k x4
+      ~65.5k  150.4 tok/s decode · 4338 tok/s prefill · 15.1s first token · 3.84 tok/step
+              x4 · 11.5 tok/s total · 16.1 tok/s each · 0.25 efficiency (serialized) · 65.4s worst first token
+  context ~131.1k
+  context ~131.1k ceiling
+  context ~131.1k x4
+     ~131.2k  136.7 tok/s decode · 4262 tok/s prefill · 30.8s first token · 3.15 tok/step
+              x4 · 5.9 tok/s total · 17 tok/s each · 0.25 efficiency (serialized) · 128.8s worst first token
+  context ~256.0k
+  context ~256.0k ceiling
+  context ~256.0k x4
+     ~256.2k  114.4 tok/s decode · 4114 tok/s prefill · 62.3s first token · 3.56 tok/step
+              x4 · 2.9 tok/s total · 12.5 tok/s each · 0.24 efficiency (serialized) · 261.5s worst first token
+  sustained load
+  benchmark used 3,158,677 tokens (3,145,860 in · 12,817 out) over 76 requests
+recording runs in ~/.llmprobe — --no-save to skip
+library 1 model → ~/.llmprobe
+  ingested → qwen3-8-flash-next-mlx-serve-mixed-4-8bit--127-0-0-1-11234 · ~/.llmprobe/qwen3-8-flash-next-mlx-serve-mixed-4-8bit--127-0-0-1-11234.json
+  models → Qwen3.8-Flash-Next-MLX-Serve-mixed-4-8bit · 127.0.0.1:11234
+  index → ~/.llmprobe/index.html
+  compare → ~/.llmprobe/compare.html
+  cards → 1 report card
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ llmprobe · http://127.0.0.1:11234/v1 · mlx-serve · Qwen3.8-Flash-Next-MLX-Serve-mixed-4-8bit
+ label Flash-Next mixed4-8 | mlx-serve 26.9.7-dev 933566c | M5 Ultra 256GB | max-concurrent 4
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PERFORMANCE
+  informational — not scored; hardware-dependent, same-machine comparisons only
+  machine: Apple M5 Ultra · 256 GB · darwin arm64
+  sustained load: steady — 154.5 → 151.9 tok/s over 12m 39s (-1.7%)
+  decode length forced to 192 tokens (ignore_eos + min_tokens) — decode and drift figures compare equal work
+  ⚠ custom setup: rungs 2k, 4k, 8k, 16k, 32k, 64k, 128k, 250k — not comparable to default runs
+  Decode throughput     154.5 tok/s (143.6–165.8)
+  Time to first token   174 ms (168–174)
+  Prefill throughput    4183.4 tok/s (4176.6–4203.6)  (10404-token prompt)
+  Context scaling  decode · first-token latency · speculation vs prompt size
+     ~2.1k   153.2 tok/s  646 ms      3.43 tok/step · 1.3× ceiling · 5.05 tok/step at ceiling (answer never used RETRY_BUDGET_MS — context may be unread)
+             x4 · 123.7 tok/s total · 45.6 tok/s each · 0.31 efficiency (serialized) · 2.6s worst first token
+     ~4.1k   152.6 tok/s  1.8s        3.62 tok/step · 1.31× ceiling · 4.8 tok/step at ceiling (answer never used RETRY_BUDGET_MS — context may be unread)
+             x4 · 76.7 tok/s total · 34.4 tok/s each · 0.31 efficiency (serialized) · 5.9s worst first token
+     ~8.3k   153.9 tok/s  2.0s        3.69 tok/step · 1.22× ceiling · 4.09 tok/step at ceiling (answer never used RETRY_BUDGET_MS — context may be unread)
+             x4 · 57.3 tok/s total · 31 tok/s each · 0.25 efficiency (serialized) · 10.2s worst first token
+    ~16.3k   147.6 tok/s  3.7s        3.49 tok/step · 1.3× ceiling · 5.19 tok/step at ceiling (answer never used RETRY_BUDGET_MS — context may be unread)
+             x4 · 36.5 tok/s total · 21.8 tok/s each · 0.24 efficiency (serialized) · 17.7s worst first token
+    ~32.9k   137.2 tok/s  7.6s        3.25 tok/step · 1.16× ceiling · 3.43 tok/step at ceiling (answer never used RETRY_BUDGET_MS — context may be unread)
+             x4 · 14.3 tok/s total · 13.9 tok/s each · 0.17 efficiency (serialized) · 50.7s worst first token
+    ~65.5k   150.4 tok/s  15.1s       3.84 tok/step · 1.1× ceiling · 3.62 tok/step at ceiling (answer never used RETRY_BUDGET_MS — context may be unread)
+             x4 · 11.5 tok/s total · 16.1 tok/s each · 0.25 efficiency (serialized) · 65.4s worst first token
+   ~131.2k   136.7 tok/s  30.8s       3.15 tok/step · 1.29× ceiling · 6 tok/step at ceiling (answer never used RETRY_BUDGET_MS — context may be unread)
+             x4 · 5.9 tok/s total · 17 tok/s each · 0.25 efficiency (serialized) · 128.8s worst first token
+   ~256.2k   114.4 tok/s  62.3s       3.56 tok/step · 1.29× ceiling · 3.1 tok/step at ceiling (answer never used RETRY_BUDGET_MS — context may be unread)
+             x4 · 2.9 tok/s total · 12.5 tok/s each · 0.24 efficiency (serialized) · 261.5s worst first token
+  Prefix cache          active  5.9× (546 ms cold → 93 ms warm)
+    usage reports 1507 of 1538 prompt tokens cached
+  Concurrency (4)       partial  0.35 efficiency
+    166.8 tok/s aggregate vs 119.1 alone · slowest first token 579 ms
+  Speculative decode    2.3× — effective (MTP/draft active)
+    predictable 277.4 tok/s · novel 120.5 tok/s
+    7.84 tokens per decode step
+    (reasoning model — the thinking phase is novel, so this understates real gains)
+
+  3,159,041 tokens (3,146,195 in · 12,846 out) · 12m 49s
